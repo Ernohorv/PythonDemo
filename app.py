@@ -3,6 +3,7 @@ import math
 from random import Random
 from flask import Flask, request, jsonify, after_this_request
 import requests
+import secret
 
 app = Flask(__name__)
 
@@ -12,7 +13,7 @@ def home():
     if request.method == 'POST':
         city = request.form.get('city')
         response = requests.get(
-            f"http://api.openweathermap.org/data/2.5/weather?q={city}&APPID=6364d96eff37ce254aeabb6fcccd9740&units=metric")
+            f"http://api.openweathermap.org/data/2.5/weather?q={city}&APPID={secret.APPID}&units=metric")
         content = json.loads(response.text)
 
         if response.status_code == 200:
